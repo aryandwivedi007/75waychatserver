@@ -1,7 +1,7 @@
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
-import * as appDocs from "../../../docs";
+import * as appDocs from '../../docs/index'
 
 // 🔹 Define Swagger options
 const swaggerOptions: swaggerJsDoc.Options = {
@@ -17,7 +17,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
     },
     servers: [
       {
-        url: "http://localhost:3000", // Change this based on your server URL
+        url: "http://localhost:5000", // Change this based on your server URL
       },
     ],
   },

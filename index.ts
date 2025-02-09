@@ -1,24 +1,38 @@
-import express,{type Express,type Request,type Response} from 'express'
-import http from 'http'
+import express, { type Express, type Request, type Response } from 'express';
+import http from 'http';
+import bodyParser from 'body-parser';
 import { setupSwagger } from './app/common/config/swagger.config';
-const app:Express=express()
-
+import { Server } from 'socket.io';
+import cors from 'cors';
+import { initSocketEvents } from './app/chat/socket.handler';
 import routers from './app/router';
-const port=(process.env.PORT) ?? 5000
+
+
+const app: Express = express();
+const port = process.env.PORT ?? 5000;
+
 setupSwagger(app);
 
+app.use(cors({
+  origin: "*",  // Allow all origins (disables CORS)
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+  credentials: true,
+}));
 
-const initApp=async ():Promise<void>=>{
+const server = http.createServer(app);
+const io = new Server(server, {});
 
-    app.use("/api", routers);
-    app.get("/",(req:Request,res:Response)=>{
-        res.send({status:"ok"})
-    })
-}
+initSocketEvents(io);  // Initialize socket events with the io instance
 
+app.use(bodyParser.json());
+app.use('/api', routers);
 
-http.createServer(app).listen(port,()=>{
-    console.log("Server is running at port",port)
-})
+app.get('/', (req: Request, res: Response) => {
+  res.send({ status: 'ok' });
+});
 
-void initApp()
+// Start server
+server.listen(port, () => {
+  console.log(`Server is running at port ${port}`);
+});
