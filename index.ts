@@ -7,23 +7,24 @@ import cors from 'cors';
 import { initSocketEvents } from './app/chat/socket.handler';
 import routers from './app/router';
 
-
 const app: Express = express();
 const port = process.env.PORT ?? 5000;
 
 setupSwagger(app);
 
-app.use(cors({
-  origin: "*",  // Allow all origins (disables CORS)
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: '*', // Allow all origins (disables CORS)
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+  }),
+);
 
 const server = http.createServer(app);
 const io = new Server(server, {});
 
-initSocketEvents(io);  // Initialize socket events with the io instance
+initSocketEvents(io); // Initialize socket events with the io instance
 
 app.use(bodyParser.json());
 app.use('/api', routers);

@@ -20,21 +20,21 @@
 //   }
 // );
 
-import { type Response, type Request, type NextFunction } from "express";
-import expressAsyncHandler from "express-async-handler";
-import { validationResult } from "express-validator";
-import createHttpError from "http-errors";
+import { type Response, type Request, type NextFunction } from 'express';
+import expressAsyncHandler from 'express-async-handler';
+import { validationResult } from 'express-validator';
+import createHttpError from 'http-errors';
 
 export const catchError = expressAsyncHandler(
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log("Validation Errors:", errors.array());  // 🛠 Debugging
+      console.log('Validation Errors:', errors.array()); // 🛠 Debugging
       throw createHttpError(400, {
-        message: "Validation error!",
+        message: 'Validation error!',
         errors: errors.array(),
       });
     }
     next();
-  }
+  },
 );

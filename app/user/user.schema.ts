@@ -1,12 +1,22 @@
-import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { IsString, IsEmail, IsOptional, IsEnum } from "class-validator";
-import { IUser } from "./user.dto";
-import { Role } from "../common/dto/role";
-import bcrypt from 'bcrypt'
-import { Room } from "../room/room.schema";
-@Entity("user")
+import {
+  BaseEntity,
+  BeforeInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { IsString, IsEmail, IsOptional, IsEnum } from 'class-validator';
+import { IUser } from './user.dto';
+import { Role } from '../common/dto/role';
+import bcrypt from 'bcrypt';
+import { Room } from '../room/room.schema';
+@Entity('user')
 export class User extends BaseEntity implements IUser {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   _id?: string;
 
   @Column()
@@ -16,13 +26,12 @@ export class User extends BaseEntity implements IUser {
   @IsEmail()
   email: string;
 
-  
   @Column({ default: true })
   @IsOptional()
   active?: boolean;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: Role,
     default: Role.USER,
   })
@@ -34,16 +43,25 @@ export class User extends BaseEntity implements IUser {
   password!: string;
 
   @OneToMany(() => Room, (room) => room.createdBy)
-  createdRooms:Room[]
+  createdRooms: Room[];
 
-   // Many-to-Many: A user can be in multiple rooms
-   @ManyToMany(() => Room, (room) => room.members)
-   rooms: Room[];
+  // Many-to-Many: A user can be in multiple rooms
+  @ManyToMany(() => Room, (room) => room.members)
+  rooms: Room[];
 
-  @CreateDateColumn({ type: "timestamp", precision: 3, default: () => "CURRENT_TIMESTAMP(3)" })
+  @CreateDateColumn({
+    type: 'timestamp',
+    precision: 3,
+    default: () => 'CURRENT_TIMESTAMP(3)',
+  })
   createdAt!: Date;
 
-  @UpdateDateColumn({ type: "timestamp", precision: 3, default: () => "CURRENT_TIMESTAMP(3)", onUpdate: "CURRENT_TIMESTAMP(3)" })
+  @UpdateDateColumn({
+    type: 'timestamp',
+    precision: 3,
+    default: () => 'CURRENT_TIMESTAMP(3)',
+    onUpdate: 'CURRENT_TIMESTAMP(3)',
+  })
   updatedAt!: Date;
 
   @BeforeInsert()
