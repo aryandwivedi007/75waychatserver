@@ -1,67 +1,37 @@
-# Node.js + TypeScript Guide
+# 75waychatserver
 
-## Project Setup
+75waychatserver is a chat application server built with **Node.js** and **TypeScript**. It provides real-time messaging functionality and utilizes **MySQL** as the database to store user data and chat messages.
 
-### 1. Initialize the project
-```sh
-mkdir nodejs-typescript-guide
-cd nodejs-typescript-guide
-npm init -y
-```
+## Features
 
-### 2. Install TypeScript
-```sh
-npm install --save-dev typescript
-npx tsc --init
-```
+- **Real-Time Messaging:** Uses WebSockets (Socket.IO) to provide real-time communication between users.
+- **User Authentication:** User registration and login functionality with JWT-based authentication.
+- **Message History:** Stores chat history in MySQL, so users can view their previous conversations.
+- **User Management:** Allows users to register, log in, and update their profile information.
+- **Multi-User Support:** Supports one-on-one and group chat functionality.
 
-### 3. Update `tsconfig.json`
-Replace the content of `tsconfig.json` with:
-```json
-{
-  "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,  
-    "strict": true,
-    "skipLibCheck": true
-  }
-}
-```
+## Technologies Used
 
-### 4. Install Express and Type Definitions
-```sh
-npm install express
-npm install --save-dev @types/express @types/node
-```
+- **Node.js** - Server-side runtime environment
+- **TypeScript** - Superset of JavaScript for type safety and better development experience
+- **MySQL** - Relational database for storing user data and chat messages
+- **Socket.IO** - Real-time bi-directional event-based communication
+- **JWT (JSON Web Token)** - Token-based authentication
+- **bcryptjs** - Password hashing for secure user authentication
 
-### 5. Create Project Structure
-```sh
-mkdir src
-npx touch-cli src/server.ts
-```
+## Prerequisites
 
-### 6. Update `package.json` scripts
-Replace the `scripts` section with:
-```json
-"scripts": {
-  "start": "node dist/server.js",
-  "build": "tsc"
-}
-```
+Before you start, ensure you have the following installed:
 
-### 7. Run the Application
-```sh
-npm run local
+- **Node.js** (v20 or higher)
+- **MySQL** (v5.7 or higher)
+- **npm** (v7 or higher)
 
-```
+## Installation
 
-
-
-## Installing Additional TypeScript Dependencies
-Use the following format to install dependencies with type definitions:
-```sh
-npm i --save-dev @types/cookie-parser
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/75waychatserver.git
+2. Run following command:
+  ```bash
+  npm install
