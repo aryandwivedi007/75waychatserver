@@ -9,3 +9,18 @@ export interface IUser {
   role: Role;
   password: string;
 }
+
+export interface ICreateUser {
+  userName: string;
+  email: string;
+  active?: boolean;
+  role: Role;
+  password: string;
+}
+
+export interface IUpdateUser {
+  userName: string;
+  email: string;
+  active?: boolean;
+  role: Role;
+}

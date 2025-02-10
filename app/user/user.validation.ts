@@ -30,11 +30,6 @@ export const updateUser = [
     .isString()
     .withMessage('Email must be a string'),
   body('active').isBoolean().withMessage('active must be a boolean'),
-  body('password')
-    .notEmpty()
-    .withMessage('Password is required field')
-    .isString()
-    .withMessage('Password must be a string'),
   body('role')
     .notEmpty()
     .withMessage('Role is a required field')
@@ -46,5 +41,4 @@ export const editUser = [
   body('userName').isString().withMessage('Username must be a string'),
   body('email').isString().withMessage('Email must be a string'),
   body('active').isBoolean().withMessage('Active status must be a boolean'),
-  body('password').isString().withMessage('Password must be a string'),
 ];

@@ -9,7 +9,7 @@ export const createRoom = [
   body('isPrivate')
     .notEmpty()
     .withMessage('Room privacy status is a required field')
-    .isString()
+    .isBoolean()
     .withMessage('Is-Private status must be a boolean value'),
   body('createdById')
     .notEmpty()
@@ -31,4 +31,22 @@ export const createRoom = [
       }
       return true;
     }),
+];
+
+export const invitationPayload = [
+  body('roomId')
+    .notEmpty()
+    .withMessage('Room Id can not be empty')
+    .isString()
+    .withMessage('Room id must be string'),
+  body('userId')
+    .notEmpty()
+    .withMessage('User id can not be empty')
+    .isString()
+    .withMessage('User id must be string'),
+  body('toBeInvitedId')
+    .notEmpty()
+    .withMessage('To be invited user can not be empty')
+    .isString()
+    .withMessage('Required value of inviting user should be a string'),
 ];

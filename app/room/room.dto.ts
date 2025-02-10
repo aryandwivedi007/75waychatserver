@@ -18,3 +18,15 @@ export interface ICreateRoomRequest {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface IUpdateRoomRequest {
+  name: string;
+  isPrivate: boolean;
+  createdBy: string;
+}
+
+export interface IRoomInvitePayload {
+  roomId: string;
+  userId: string;
+  toBeInvitedId: string;
+}

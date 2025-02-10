@@ -1,4 +1,4 @@
-import createUserDocs from './user/create-user.docs';
+import createUserDocs from './user/user.docs';
 
 export default {
   ...createUserDocs,
