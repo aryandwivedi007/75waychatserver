@@ -13,8 +13,8 @@ userRoutes
     passport.authenticate('jwt', { session: false }),
     userController.getUserById
   )
-  .get('/:email', userController.findUserByEmail)
-  .post('/', userValidator.createUser, catchError, userController.createUser)
+  .get('/:email/find', userController.findUserByEmail)
+  .post('/', catchError, userController.findUserByEmail)
   .put(
     '/:userId',
     passport.authenticate('jwt', { session: false }),

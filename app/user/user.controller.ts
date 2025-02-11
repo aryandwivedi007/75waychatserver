@@ -35,6 +35,7 @@ export const getAllGroupOfAUser = expressAsyncHandler(async (req: Request, res: 
 });
 
 export const findUserByEmail = expressAsyncHandler(async (req: Request, res: Response) => {
+  console.log(req.params.email)
   const result = await userService.findUserByEmail(req.params.email);
   res.send(createResponse(result, 'User asscociated with email is fetched successfully'));
 });

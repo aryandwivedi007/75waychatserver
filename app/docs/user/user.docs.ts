@@ -216,7 +216,7 @@ export const userRoutesDocs = {
       },
     },
   },
-  '/users/{email}': {
+  '/users/{email}/find': {
     get: {
       summary: 'Find User By Email',
       description: 'Fetches a user by their email.',

@@ -8,7 +8,7 @@ export const AppDataSource = new DataSource({
   port: 3306,
   username: 'root',
   password: 'root',
-  database: '75waychatdb',
+  database: '75waychatserver',
   entities: [User, Room],
   synchronize: true,
   logging: false,
