@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { User } from '../user/user.schema';
 import { Room } from '../room/room.schema';
+import { Chat } from '../chat/chat.schema';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -9,7 +10,7 @@ export const AppDataSource = new DataSource({
   username: 'root',
   password: 'root',
   database: '75waychatserver',
-  entities: [User, Room],
+  entities: [User, Room, Chat],
   synchronize: true,
   logging: false,
 });

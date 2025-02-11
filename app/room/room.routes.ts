@@ -22,7 +22,7 @@ roomRouter
   )
   .get(
     '/:roomId/members',
-    passport.authenticate('jwt', { session: false }),
+
     catchError,
     roomController.getAllMembersOfAGroupForUser
   )

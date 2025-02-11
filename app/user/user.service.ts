@@ -4,6 +4,7 @@ import { RoomRepository } from '../room/room.repository';
 import * as invitationService from '../common/jwt/invite.token.service';
 import { IRoomInvitePayload } from '../room/room.dto';
 import createHttpError from 'http-errors';
+import { decodeToken } from '../common/jwt/passport.jwt.service';
 export const getUserById = async (userId: string) => {
   const user = UserRepository.findOneBy({ _id: userId });
   return user;
@@ -48,5 +49,10 @@ export const getAllGroupOfAUser = async (userId: string) => {
 
 export const findUserByEmail = async (email: string) => {
   const user = await UserRepository.findOne({ where: { email } });
+  return user;
+};
+
+export const getLoggedInUser = async (user: Express.User) => {
+  console.log(user);
   return user;
 };

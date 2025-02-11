@@ -28,10 +28,11 @@ import createHttpError from 'http-errors';
 export const catchError = expressAsyncHandler((req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('Validation Errors:', errors.array()); // 🛠 Debugging
-    throw createHttpError(400, {
-      message: 'Validation error!',
-      errors: errors.array(),
+    console.log('Validation Errors:', errors.array());
+    const data = { errors: errors.array() };
+    throw res.status(400).send({
+      success: false,
+      data,
     });
   }
   next();

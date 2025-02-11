@@ -1,11 +1,11 @@
-version: "3.8"
+version: '3.8'
 
 services:
   backend:
     build: .
     container_name: backend
     ports:
-      - "5000:5000"
+      - '5000:5000'
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=75waychatserver
@@ -23,7 +23,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=backend
     ports:
-      - "3306:3306"  # Maps 5432 on host to 3306 (default MySQL port) in container
+      - '3306:3306' # Maps 5432 on host to 3306 (default MySQL port) in container
     volumes:
       - mysql-data:/var/lib/mysql
     networks:

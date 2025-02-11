@@ -1,9 +1,10 @@
-
 import { Server, Socket } from 'socket.io';
 import axios from 'axios';
-
+import { IChat } from './chat.dto';
+import { saveChatToDatabase } from './chat.service';
 
 export const initSocketEvents = (io: Server) => {
+  let arr = new Array<IChat>();
   io.on('connection', (socket: Socket) => {
     console.log('A user connected');
 
@@ -13,18 +14,25 @@ export const initSocketEvents = (io: Server) => {
       console.log('Data received in joinRoom:', data);
 
       try {
-        
         console.log(`🔍 Fetching room data for roomId: ${roomId}`);
-        const response = await axios.get(`http://localhost:5000/api/rooms/${data.roomId}`);
+        const response = await axios.get(`http://localhost:5000/api/rooms/${data.roomId}/members`);
         const roomData = response.data;
-        console.log(data.roomId);
-        if (roomData && roomData.users && roomData.users.includes(userId)) {
-         
-          socket.join(roomId);
-          console.log(`User ${userId} joined room: ${roomId}`);
+
+        console.log(roomData.data);
+
+        if (roomData && roomData.data) {
+          const userInRoom = roomData.data.some((user) => user._id === userId);
+
+          if (userInRoom) {
+            socket.join(roomId);
+            console.log(`User ${userId} joined room: ${roomId}`);
+          } else {
+            console.log(`User ${userId} is not in room ${roomId}`);
+            socket.emit('error', { message: 'User is not part of this room' });
+          }
         } else {
-          console.log(`User ${userId} is not in room ${roomId}`);
-          socket.emit('error', { message: 'User is not part of this room' });
+          console.log('No room data found');
+          socket.emit('error', { message: 'Room data is not available' });
         }
       } catch (error) {
         console.error(`Error fetching room data for roomId ${roomId}:`, error);
@@ -35,7 +43,15 @@ export const initSocketEvents = (io: Server) => {
     // Handle messages
     socket.on('sendMessage', async (data) => {
       const { roomId, userId, message } = data;
-
+      arr.push(data);
+      if (arr.length == 2) {
+        const response = await saveChatToDatabase(arr);
+        if (response == true) {
+          console.log('Chat data is persisted to database');
+        } else {
+          console.log('Some internal server error occured');
+        }
+      }
       try {
         // Fetch room data from the backend
         const response = await axios.get(`http://localhost:5000/api/rooms/${roomId}`);

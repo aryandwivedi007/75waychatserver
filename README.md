@@ -33,6 +33,9 @@ Before you start, ensure you have the following installed:
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/75waychatserver.git
+   ```
 2. Run following command:
-  ```bash
-  npm install
+
+```bash
+npm install
+```

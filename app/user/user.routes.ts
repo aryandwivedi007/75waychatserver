@@ -36,6 +36,12 @@ userRoutes
     userController.deleteUser
   )
   .get(
+    '/loggedInUser/get',
+    passport.authenticate('jwt', { session: false }),
+    catchError,
+    userController.getLoggedInUser
+  )
+  .get(
     '/:userId/getAllRooms',
     passport.authenticate('jwt', { session: false }),
     catchError,

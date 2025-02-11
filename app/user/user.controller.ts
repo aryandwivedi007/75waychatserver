@@ -4,8 +4,6 @@ import * as userService from './user.service';
 import { createResponse } from '../common/helper/response.helper';
 
 export const getUserById = expressAsyncHandler(async (req: Request, res: Response) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  console.log(token);
   const result = await userService.getUserById(req.params.userId);
   res.send(createResponse(result, 'User data fetched successfully'));
 });
@@ -15,6 +13,7 @@ export const createUser = expressAsyncHandler(async (req: Request, res: Response
 });
 
 export const updateUser = expressAsyncHandler(async (req: Request, res: Response) => {
+  const token = req.headers.authorization?.split(' ')[1];
   const result = await userService.updateUser(req.params.userId, req.body);
   res.send(createResponse(result, 'User updated successfully'));
 });
@@ -35,7 +34,13 @@ export const getAllGroupOfAUser = expressAsyncHandler(async (req: Request, res: 
 });
 
 export const findUserByEmail = expressAsyncHandler(async (req: Request, res: Response) => {
-  console.log(req.params.email)
   const result = await userService.findUserByEmail(req.params.email);
   res.send(createResponse(result, 'User asscociated with email is fetched successfully'));
+});
+
+export const getLoggedInUser = expressAsyncHandler(async (req: Request, res: Response) => {
+  console.log('hkfgjjmn', req.user);
+  console.log(req.user);
+  const result = await userService.getLoggedInUser(req.user);
+  res.send(createResponse(result, 'Logged in user is fetched successfully'));
 });

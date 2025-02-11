@@ -7,6 +7,8 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../../user/user.dto';
 import { findUserByEmail } from '../../user/user.service';
+import { User } from '../../user/user.schema';
+import { UserRepository } from '../../user/user.repository';
 
 const isValidPassword = async (value: string, password: string) => {
   const compare = bcrypt.compare(value, password);
