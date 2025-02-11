@@ -1,6 +1,7 @@
 # 75waychatserver
 
 75waychatserver is a chat application server built with **Node.js** and **TypeScript**. It provides real-time messaging functionality and utilizes **MySQL** as the database to store user data and chat messages.
+<img src="/swagger_docs.png" alt="Swagger Image" width="300"/>
 
 ## Features
 
