@@ -1,31 +1,22 @@
 export const chatRoutesDocs = {
-  '/chat': {
-    post: {
-      summary: 'Send Message',
-      description: 'Sends a message to a specific room.',
+  '/chats/${roomId}/allChats': {
+    get: {
+      summary: 'Get Message',
+      description: 'Get all message from a specific room.',
       tags: ['Messages'],
-      requestBody: {
-        required: true,
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              required: ['roomId', 'userId', 'message'],
-              properties: {
-                roomId: {
-                  type: 'string',
-                  description: 'The ID of the room to send the message to',
-                },
-                userId: { type: 'string', description: 'The ID of the user sending the message' },
-                message: { type: 'string', description: 'The message content' },
-              },
-            },
+      parameters: [
+        {
+          name: 'roomId',
+          in: 'path',
+          required: true,
+          schema: {
+            type: 'string',
           },
         },
-      },
+      ],
       responses: {
-        200: { description: 'Message sent successfully.' },
-        400: { description: 'Invalid request body or missing fields.' },
+        200: { description: 'Message Received successfully.' },
+        400: { description: 'Invalid roomId   missing fields.' },
       },
     },
   },

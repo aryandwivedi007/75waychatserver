@@ -5,6 +5,7 @@ import { IChat } from './chat.dto';
 export class Chat implements IChat {
   @PrimaryGeneratedColumn('uuid')
   _id: string;
+
   @Column()
   roomId: string;
   @Column()

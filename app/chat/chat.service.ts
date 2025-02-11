@@ -1,7 +1,9 @@
 // chat.service.ts
+import { createQueryBuilder } from 'typeorm';
 import { IChat } from './chat.dto';
 import { ChatRepository } from './chat.repository';
 import { Chat } from './chat.schema';
+import { classToPlain, plainToClass } from 'class-transformer';
 
 export const saveChatToDatabase = async (chatData: IChat[]) => {
   const chats = chatData.map((data) => {
@@ -18,7 +20,15 @@ export const saveChatToDatabase = async (chatData: IChat[]) => {
     return true;
   } catch (error) {
     console.error('Error saving chats:', error);
-    throw error;
     return false;
   }
+};
+
+export const getChatsByRoomId = async (roomId: string) => {
+  const chats = await ChatRepository.createQueryBuilder('chat')
+    .where('chat.roomId = :roomId', { roomId })
+    .getMany(); // Retrieve the data
+  console.log(chats);
+  const plainChatData = classToPlain(chats);
+  return plainChatData;
 };
