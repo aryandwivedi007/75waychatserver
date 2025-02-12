@@ -117,6 +117,24 @@ export const roomRoutesDocs = {
       summary: 'Update Room Members',
       description: 'Adds or removes members from a room.',
       tags: ['Rooms'],
+      requestBody: {
+        required: true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              required: ['members'],
+              properties: {
+                members: {
+                  type: 'array',
+                  items: { type: 'string' },
+                  description: 'List of member IDs',
+                },
+              },
+            },
+          },
+        },
+      },
       parameters: [
         {
           name: 'roomId',

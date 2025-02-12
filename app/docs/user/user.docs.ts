@@ -1,7 +1,7 @@
 export const userRoutesDocs = {
   '/users': {
     post: {
-      summary: 'User',
+      summary: 'Create or Signup User',
       description: 'Creates a new user in the system.',
       tags: ['Users'],
       requestBody: {

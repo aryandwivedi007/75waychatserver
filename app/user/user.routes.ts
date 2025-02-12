@@ -14,7 +14,7 @@ userRoutes
     userController.getUserById
   )
   .get('/:email/find', userController.findUserByEmail)
-  .post('/', catchError, userController.findUserByEmail)
+  .post('/', catchError, userController.createUser)
   .put(
     '/:userId',
     passport.authenticate('jwt', { session: false }),

@@ -32,7 +32,7 @@ export const createRoom = async (data: ICreateRoomRequest) => {
 };
 
 export const getRoomById = async (roomId: string) => {
-  const room = await RoomRepository.findOne({ where: { _id: roomId } });
+  const room = await RoomRepository.findOne({ where: { _id: roomId }, relations: ['messages'] });
   return room;
 };
 

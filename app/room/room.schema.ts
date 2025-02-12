@@ -6,12 +6,14 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { IRoom } from './room.dto';
 import { User } from '../user/user.schema';
 import { IUser } from '../user/user.dto';
+import { Chat } from '../chat/chat.schema';
 @Entity('room')
 export class Room implements IRoom {
   @PrimaryGeneratedColumn('uuid')
@@ -36,6 +38,9 @@ export class Room implements IRoom {
     default: () => 'CURRENT_TIMESTAMP(3)',
   })
   createdAt!: Date;
+
+  @OneToMany(() => Chat, (message) => message.room)
+  messages: Chat[];
 
   @UpdateDateColumn({
     type: 'timestamp',

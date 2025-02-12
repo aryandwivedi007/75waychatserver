@@ -4,7 +4,6 @@ import { Express } from 'express';
 import { userRoutesDocs } from '../../docs/user/user.docs';
 import { roomRoutesDocs } from '../../docs/room/room.docs';
 import { authRoutesDocs } from '../../docs/auth/auth.docs';
-import { chatRoutesDocs } from '../../docs/chat/chat.docs';
 
 // 🔹 Define Swagger options
 const swaggerOptions: swaggerJsDoc.Options = {
@@ -19,7 +18,6 @@ const swaggerOptions: swaggerJsDoc.Options = {
       ...userRoutesDocs,
       ...roomRoutesDocs,
       ...authRoutesDocs,
-      ...chatRoutesDocs,
     },
     servers: [
       {

@@ -14,6 +14,7 @@ import { IUser } from './user.dto';
 import { Role } from '../common/dto/role';
 import bcrypt from 'bcrypt';
 import { Room } from '../room/room.schema';
+import { Chat } from '../chat/chat.schema';
 @Entity('user')
 export class User extends BaseEntity implements IUser {
   @PrimaryGeneratedColumn('uuid')
@@ -63,6 +64,9 @@ export class User extends BaseEntity implements IUser {
     onUpdate: 'CURRENT_TIMESTAMP(3)',
   })
   updatedAt!: Date;
+
+  @OneToMany(() => Chat, (message) => message.user)
+  messages: Chat[];
 
   @BeforeInsert()
   async hashPassword() {

@@ -1,3 +1,4 @@
+/*
 export const chatRoutesDocs = {
   '/chats/${roomId}/allChats': {
     get: {
@@ -60,3 +61,4 @@ export const chatRoutesDocs = {
   //   },
   // },
 };
+*/

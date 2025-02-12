@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
   database: '75waychatserver',
   entities: [User, Room, Chat],
   synchronize: true,
-  logging: false,
+  logging: true,
 });
 
 AppDataSource.initialize()

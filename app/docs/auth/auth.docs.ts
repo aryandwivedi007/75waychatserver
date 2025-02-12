@@ -15,12 +15,12 @@ export const authRoutesDocs = {
                 email: {
                   type: 'string',
                   description: 'The email of the user.',
-                  example: 'user@example.com',
+                  example: 'ranga@gmail.com',
                 },
                 password: {
                   type: 'string',
                   description: 'The password of the user.',
-                  example: 'password123',
+                  example: 'dummy',
                 },
               },
               required: ['email', 'password'],
