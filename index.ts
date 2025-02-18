@@ -15,12 +15,13 @@ const app: Express = express();
 const port = process.env.PORT ?? 5000;
 app.use(
   cors({
-    origin: '*', // Allow all origins (disables CORS)
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true,
+    origin: 'http://localhost:5174', 
+    methods: ['GET', 'POST', 'OPTIONS'], 
+    allowedHeaders: ['Content-Type', 'Authorization'], 
+    credentials: true, 
   })
 );
+
 
 setupSwagger(app);
 

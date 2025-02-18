@@ -23,7 +23,7 @@ export const initPassport = (): void => {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       },
       async (token: { user: Request['user'] }, done) => {
-        console.log('Decoded token:', token);
+        //console.log('Decoded token:', token);
         try {
           done(null, token);
         } catch (error) {
@@ -82,6 +82,6 @@ export const createUserTokens = (user: Omit<IUser, 'password'>) => {
 
 export const decodeToken = (token: string) => {
   const decode = jwt.decode(token);
-  console.log(decode);
+  //console.log(decode);
   return decode as IUser;
 };

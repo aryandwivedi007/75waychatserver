@@ -12,9 +12,12 @@ export const AppDataSource = new DataSource({
   database: '75waychatserver',
   entities: [User, Room, Chat],
   synchronize: true,
-  logging: true,
+  logging: false,
 });
 
 AppDataSource.initialize()
   .then(() => console.log('Database Connected!'))
   .catch((err) => console.error('Database Connection Error:', err));
+
+
+  

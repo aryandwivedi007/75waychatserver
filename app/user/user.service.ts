@@ -5,12 +5,14 @@ import * as invitationService from '../common/jwt/invite.token.service';
 import { IRoomInvitePayload } from '../room/room.dto';
 import createHttpError from 'http-errors';
 import { decodeToken } from '../common/jwt/passport.jwt.service';
+import { User } from './user.schema';
 export const getUserById = async (userId: string) => {
   const user = UserRepository.findOneBy({ _id: userId });
   return user;
 };
 
 export const createUser = async (data: IUser) => {
+  console.log(data)
   const user = await UserRepository.create(data);
   user.active = true;
   return await UserRepository.save(user);
@@ -39,12 +41,13 @@ export const deleteUser = async (userId: string) => {
   return result.affected ? true : false;
 };
 
-export const getAllGroupOfAUser = async (userId: string) => {
+export const getAllGroupOfAUser = async (email: string) => {
   const user = await UserRepository.findOne({
-    where: { _id: userId },
+    where: { email: email },
     relations: ['createdRooms'],
   });
-  return user.createdRooms;
+  console.log(user.createdRooms)
+  return user;
 };
 
 export const findUserByEmail = async (email: string) => {
@@ -52,7 +55,17 @@ export const findUserByEmail = async (email: string) => {
   return user;
 };
 
-export const getLoggedInUser = async (user: Express.User) => {
-  console.log(user);
-  return user;
-};
+export const getAllUsers=async()=>{
+  const users=await UserRepository.find()
+  console.log(users)
+  return users;
+}
+
+// export const getLoggedInUser = async (user: Express.User) => {
+//   console.log(user);
+//   return user;
+// };
+
+// export const getUser=async()=>{
+
+// }

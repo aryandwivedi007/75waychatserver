@@ -176,21 +176,12 @@ export const userRoutesDocs = {
       },
     },
   },
-  '/users/{userId}/getAllRooms': {
+  '/users/rooms/getAllRooms': {
     get: {
       summary: 'Get All Rooms of a User',
       description: 'Fetches all the rooms/groups associated with a user.',
       tags: ['Users'],
-      parameters: [
-        {
-          name: 'userId',
-          in: 'path',
-          required: true,
-          schema: {
-            type: 'string',
-          },
-        },
-      ],
+      
       responses: {
         200: {
           description: 'Rooms fetched successfully.',

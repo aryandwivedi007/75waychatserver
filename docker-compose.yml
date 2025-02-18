@@ -18,7 +18,7 @@ services:
 
   mysql:
     image: mysql:8
-    container_name: mysql-db
+    container_name: mysql-dbb
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=backend

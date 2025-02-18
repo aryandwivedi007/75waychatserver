@@ -7,6 +7,12 @@ import { catchError } from '../common/middleware/catch-error.middleware';
 const userRoutes = Router();
 
 userRoutes
+ .get(
+            '/getAllUsers',
+             //passport.authenticate('jwt', { session: false }),
+             //catchError,
+            userController.getAllUser
+          )
   .get(
     '/:userId',
     catchError,
@@ -41,8 +47,16 @@ userRoutes
     catchError,
     userController.getLoggedInUser
   )
+  
   .get(
-    '/:userId/getAllRooms',
+      '/users/me',
+      passport.authenticate('jwt', { session: false }),
+      catchError,
+      userController.getLoggedInUser
+    )
+   
+  .get(
+    '/rooms/getAllRooms',
     passport.authenticate('jwt', { session: false }),
     catchError,
     userController.getAllGroupOfAUser
